@@ -1,2 +1,2 @@
-# qua-portafolio
+# qa-portafolio
 Portafolio de QA: pruebas manuales, API y automatización con Python y Playwright
