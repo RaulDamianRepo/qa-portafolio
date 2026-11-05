@@ -15,6 +15,17 @@ Ejecutado por: Raúl Damián
 | **Resultado obtenido** | 1. La URL cambia a `/inventory.html`<br>2. Aparece el título "Products"<br>3. Se ve el ícono del carrito<br>4. No aparece ningún mensaje de error |
 | **Estado** | ✅ Pasó |
 
+## TC-LOGIN-02: Login fallido por contraseña incorrecta
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/, sin sesión iniciada |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce1` |
+| **Pasos** | 1. Escribir el usuario<br>2. Escribir la contraseña<br>3. Clic en Login |
+| **Resultado esperado** | 1. Se queda en la misma pantalla <br>2. Aparece una leyenda sobre usuario y contraseña no coinciden<br>3. los campos de username y password en rojo<br>
+| **Resultado obtenido** | 1. Se queda en la misma pantalla<br>2. Aparece la leyenda: `Epic sadface: Username and password do not match any user in this service`<br>3. el borde inferior de los campos Username y Password en rojo y aparece una x en un circulo al final de esos campos.<br> |
+| **Estado** | ⚠️ Pasó con observación, La leyenda aparece desfasado con su recuadro.  |
+
 ## TC-LOGIN-03: Login denegado a usuario bloqueado
 
 | Campo | Contenido |
@@ -22,7 +33,7 @@ Ejecutado por: Raúl Damián
 | **Precondición** | Estar en https://www.saucedemo.com/, sin sesión iniciada |
 | **Datos** | Usuario: `locked_out_user` · Contraseña: `secret_sauce` |
 | **Pasos** | 1. Escribir el usuario<br>2. Escribir la contraseña<br>3. Clic en Login |
-| **Resultado esperado** | 1. Se queda en la misma pantalla <br>2. parece una leyenda sobre usuario restringido<br>3. los campos de username y password en rojo<br>
+| **Resultado esperado** | 1. Se queda en la misma pantalla <br>2. Aparece una leyenda sobre usuario restringido<br>3. los campos de username y password en rojo<br>
 | **Resultado obtenido** | 1. Se queda en la misma pantalla<br>2. Aparece la leyenda: `Epic sadface: Sorry, this user has been locked out`<br>3. el borde inferior de los campos en rojo y aparece una x en un circulo al final del campo.<br> |
 | **Estado** | ✅ Pasó |
 
@@ -34,8 +45,8 @@ Ejecutado por: Raúl Damián
 | **Precondición** | Estar en https://www.saucedemo.com/, sin sesión iniciada |
 | **Datos** | ninguno |
 | **Pasos** | 1. Click en login<br>
-| **Resultado esperado** | 1. Se queda en la misma pantalla <br>2. Aparece una leyenda sobre usuario y contraseña no pueden estar vacios<br>3. los campos de username y password en rojo<br>
-| **Resultado obtenido** | 1. Se queda en la misma pantalla<br>2. Aparece la leyenda: `Epic sadface: Username is required`<br>3. el border inferior de los campos Username y Password en rojo y aparece una x en un circulo al final de esos campos..<br> |
+| **Resultado esperado** | 1. Se queda en la misma pantalla <br>2. Aparece una leyenda sobre usuario y contraseña no pueden estar vacíos<br>3. los campos de username y password en rojo<br>
+| **Resultado obtenido** | 1. Se queda en la misma pantalla<br>2. Aparece la leyenda: `Epic sadface: Username is required`<br>3. el borde inferior de los campos Username y Password en rojo y aparece una x en un circulo al final de esos campos.<br> |
 | **Estado** | ❌ Falló, se espera que diga que tanto el username como el password son necesarios |
 
 ## TC-LOGIN-05: Login denegado con usuario pero con contraseña vacía
@@ -43,10 +54,10 @@ Ejecutado por: Raúl Damián
 | Campo | Contenido |
 |---|---|
 | **Precondición** | Estar en https://www.saucedemo.com/, sin sesión iniciada |
-| **Datos** | usuario: standard_user password:(vacía) |
+| **Datos** | Usuario: `standard_user` · Contraseña:(vacía) |
 | **Pasos** | 1. Escribir el usuario<br>2. Dejar la contraseña vacía<br>3. Clic en Login |
-| **Resultado esperado** | 1. Se queda en la misma pantalla <br>2. Aparece una leyenda sobre contraseña no puede estar vacio<br>3. el campo password en rojo<br>
-| **Resultado obtenido** | 1. Se queda en la misma pantalla<br>2. Aparece la leyenda: `Epic sadface: Password is required`<br>3. el border inferior de los campos Username y Password en rojo y aparece una x en un circulo al final de esos campos..<br> |
+| **Resultado esperado** | 1. Se queda en la misma pantalla <br>2. Aparece una leyenda sobre contraseña no puede estar vacía<br>3. el campo password en rojo<br>
+| **Resultado obtenido** | 1. Se queda en la misma pantalla<br>2. Aparece la leyenda: `Epic sadface: Password is required`<br>3. el borde inferior de los campos Username y Password en rojo y aparece una x en un circulo al final de esos campos.<br> |
 | **Estado** | ⚠️ Pasó con observación, la app también marca en rojo y pone una x en un circulo al final del campo en username. Consultar si ese es el comportamiento deseado |
 
 
