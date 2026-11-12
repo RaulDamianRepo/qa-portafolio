@@ -36,22 +36,23 @@ def convertir_tiempo(texto):
             return numero
     except ValueError:
         return None
-    
-# imprimirá 4.8
-print(convertir_tiempo("4.8"))
 
-# imprimirá None
-print(convertir_tiempo("cinco"))
+if __name__ == "__main__":
+    # imprimirá 4.8
+    print(convertir_tiempo("4.8"))
 
-# imprimirá None
-print(convertir_tiempo(""))
+    # imprimirá None
+    print(convertir_tiempo("cinco"))
 
-# imprimirá None
-print(convertir_tiempo("-2"))
+    # imprimirá None
+    print(convertir_tiempo(""))
 
-# imprimirá 0.0
-print(convertir_tiempo("0"))
+    # imprimirá None
+    print(convertir_tiempo("-2"))
+
+    # imprimirá 0.0
+    print(convertir_tiempo("0"))
 
 
-print(type(convertir_tiempo("cinco")))
-print(type(convertir_tiempo("-2")))
+    print(type(convertir_tiempo("cinco")))
+    print(type(convertir_tiempo("-2")))
