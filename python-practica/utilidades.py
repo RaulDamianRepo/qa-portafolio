@@ -28,6 +28,10 @@ def guardar_reporte(casos, nombre_archivo):
                aprobadas += 1
         archivo.write(f"Aprobadas: {aprobadas} de {len(casos)}\n")
 
+def calcular_total(precios,tasa_impuestos):
+    subtotal = sum(precios)
+    impuesto = round(subtotal * tasa_impuestos, 2)
+    return round(subtotal + impuesto, 2)
 
 if __name__ == "__main__":
     print("Se cargó utilidades.py")

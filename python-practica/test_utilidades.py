@@ -12,3 +12,10 @@ def test_estado_texto_cuando_falla():
     resultado = utilidades.estado_texto(False)
     assert resultado == "FALLÓ"
 
+def test_subtotal_backpack_y_bike_light():
+    assert sum([29.99,9.99]) == 39.98
+
+
+def test_total_con_impuestos_8_por_ciento():
+    total = utilidades.calcular_total([29.99,9.99], 0.08)
+    assert total == 43.18
