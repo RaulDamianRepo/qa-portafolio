@@ -102,3 +102,81 @@ Ejecutado por: Raúl Damián
 | **Resultado esperado** | 1. Cada producto muestra el precio de referencia<br>2. Cada producto muestra su propia imagen<br>3. El ícono del carrito está en la esquina superior derecha y no se encima con el filtro |
 | **Resultado obtenido** | 1. "Sauce Labs Backpack" con precio $3.16, "Sauce Labs Bike Light" con precio de $75.01, "Sauce Labs Bolt T-Shirt" con precio de $10.74, "Sauce Labs Fleece Jacket" con precio de $96.12, "Sauce Labs Onesie" con precio de $18.93 y "Test.allTheThings() T-Shirt (Red)" con precio de $88.01, cada vez que se recarga la página los precios de todos los productos cambian<br>2."Sauce Labs Backpack" muestra una imagen de un perro<br>3. El ícono del carrito aparece arriba del ícono del filtro |
 | **Estado** | ❌ Falló. Precios distintos a los de referencia, imagen incorrecta en Sauce Labs Backpack e ícono del carrito desacomodado. |
+
+## TC-COMPRA-10: Hacer checkout con los campos vacíos en información
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/checkout-step-one.html (iniciar sesión → carrito → Checkout), con sesión iniciada con `standard_user` y "Sauce Labs Backpack" en el carrito |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce` · Sauce Labs Backpack ($29.99) |
+| **Pasos** | 1. Dar clic en el botón de "Continue" |
+| **Resultado esperado** | 1. Se queda en la misma pantalla<br>2. Aparece una leyenda que nos dice que no pueden estar vacíos los campos<br>3. Los campos se ponen en color rojo |
+| **Resultado obtenido** | 1. Se queda en la misma pantalla<br>2. Aparece una leyenda que nos dice: "Error: First Name is required"<br>3. Los campos se ponen en color rojo con una "x" sobre un círculo rojo al final de cada campo |
+| **Estado** | ⚠️ Pasó con observación, la leyenda solo menciona que el campo de "First Name" es requerido, se recomienda ver si es conveniente que se mencionen que todos los campos son requeridos |
+
+## TC-COMPRA-11: Hacer checkout con solo el campo de First Name lleno en información
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/checkout-step-one.html (iniciar sesión → carrito → Checkout), con sesión iniciada con `standard_user` y "Sauce Labs Backpack" en el carrito |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce` · Sauce Labs Backpack ($29.99) · First Name: Rodrigo |
+| **Pasos** | 1. Llenar el campo de "First Name" con "Rodrigo"<br>2. Dar clic en el botón de "Continue" |
+| **Resultado esperado** | 1. Se queda en la misma pantalla<br>2. Aparece una leyenda que nos dice que no pueden estar vacíos los campos de "Last Name" y "Zip/Postal Code"<br>3. Los campos se ponen en color rojo |
+| **Resultado obtenido** | 1. Se queda en la misma pantalla<br>2. Aparece una leyenda que nos dice: "Error: Last Name is required"<br>3. Los campos de "Last Name" y "Zip/Postal Code" se ponen en color rojo con una "x" sobre un círculo rojo al final de cada campo |
+| **Estado** | ⚠️ Pasó con observación, la leyenda solo menciona que el campo de "Last Name" es requerido, se recomienda ver si es conveniente que se mencione que también el campo de "Zip/Postal Code" es requerido. Además, el campo de "First Name" también pone el borde rojo y la "x" sobre un círculo rojo, ver si es necesario que no lo marque como error |
+
+## TC-COMPRA-12: Hacer checkout con los campos de First Name y Last Name llenos en información
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/checkout-step-one.html (iniciar sesión → carrito → Checkout), con sesión iniciada con `standard_user` y "Sauce Labs Backpack" en el carrito |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce` · Sauce Labs Backpack ($29.99) · First Name: Rodrigo · Last Name: Barriga |
+| **Pasos** | 1. Llenar el campo de "First Name" con "Rodrigo"<br>2. Llenar el campo de "Last Name" con "Barriga"<br>3. Dar clic en el botón de "Continue" |
+| **Resultado esperado** | 1. Se queda en la misma pantalla<br>2. Aparece una leyenda que nos dice que no puede estar vacío el campo de "Zip/Postal Code"<br>3. El campo se pone en color rojo |
+| **Resultado obtenido** | 1. Se queda en la misma pantalla<br>2. Aparece una leyenda que nos dice: "Error: Postal Code is required"<br>3. Los 3 campos se ponen en color rojo con una "x" sobre un círculo rojo al final de cada campo |
+| **Estado** | ⚠️ Pasó con observación, los campos de "First Name" y "Last Name" también ponen el borde rojo y la "x" sobre un círculo rojo, ver si es necesario que no lo marque como error |
+
+## TC-COMPRA-13: Hacer checkout con solo 1 carácter en los campos de First Name, Last Name y Zip/Postal Code en información
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/checkout-step-one.html (iniciar sesión → carrito → Checkout), con sesión iniciada con `standard_user` y "Sauce Labs Backpack" en el carrito |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce` · Sauce Labs Backpack ($29.99) · First Name: "x" · Last Name: "x" · Zip/Postal Code: "x" |
+| **Pasos** | 1. Llenar los tres campos con una "x"<br>2. Dar clic en el botón de "Continue" |
+| **Resultado esperado** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparecen los datos del artículo a comprar, de la tarjeta de crédito, la información de envío, el desglose del costo<br>3. Aparece el botón de "Finish" |
+| **Resultado obtenido** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparecen los datos del artículo a comprar, de la tarjeta de crédito, la información de envío, el desglose del costo<br>3. Aparece el botón de "Finish" |
+| **Estado** | ⚠️ Pasó con observación. Existen nombres y apellidos de una sola letra. Sin embargo, un zip code de un carácter sí es dudoso. |
+
+## TC-COMPRA-14: Hacer checkout con espacios en los campos de First Name, Last Name y Zip/Postal Code en información
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/checkout-step-one.html (iniciar sesión → carrito → Checkout), con sesión iniciada con `standard_user` y "Sauce Labs Backpack" en el carrito |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce` · Sauce Labs Backpack ($29.99) · First Name: " " · Last Name: " " · Zip/Postal Code: " " |
+| **Pasos** | 1. Llenar los tres campos con un espacio<br>2. Dar clic en el botón de "Continue" |
+| **Resultado esperado** | 1. Se queda en la misma pantalla<br>2. Aparece "Error: First Name is required"<br>3. Los 3 campos se ponen en color rojo |
+| **Resultado obtenido** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparecen los datos del artículo a comprar, de la tarjeta de crédito, la información de envío, el desglose del costo<br>3. Aparece el botón de "Finish" |
+| **Estado** | ❌ Falló. La app ya exige estos campos. Un campo con solo espacios está vacío en la práctica, así que se salta validación que la propia app tiene |
+
+## TC-COMPRA-15: Hacer checkout con los campos de First Name y Last Name llenos y Zip/Postal Code con letras en información
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/checkout-step-one.html (iniciar sesión → carrito → Checkout), con sesión iniciada con `standard_user` y "Sauce Labs Backpack" en el carrito |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce` · Sauce Labs Backpack ($29.99) · First Name: "Rodrigo" · Last Name: "Barriga" · Zip/Postal Code: "ABCDE" |
+| **Pasos** | 1. Llenar los tres campos<br>2. Dar clic en el botón de "Continue" |
+| **Resultado esperado** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparecen los datos del artículo a comprar, de la tarjeta de crédito, la información de envío, el desglose del costo<br>3. Aparece el botón de "Finish" |
+| **Resultado obtenido** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparecen los datos del artículo a comprar, de la tarjeta de crédito, la información de envío, el desglose del costo<br>3. Aparece el botón de "Finish" |
+| **Estado** | ⚠️ Pasó con observación, en México son 5 dígitos, pero en Reino Unido o Canadá los códigos postales llevan letras, y SauceDemo es una tienda en inglés. Aceptar letras puede ser correcto. |
+
+## TC-COMPRA-16: Hacer checkout con el campo de First Name con 100 caracteres y Last Name y Zip/Postal Code llenos en información
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/checkout-step-one.html (iniciar sesión → carrito → Checkout), con sesión iniciada con `standard_user` y "Sauce Labs Backpack" en el carrito |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce` · Sauce Labs Backpack ($29.99) · First Name: "A" cien veces · Last Name: "Barriga" · Zip/Postal Code: "12345" |
+| **Pasos** | 1. Llenar los tres campos<br>2. Dar clic en el botón de "Continue" |
+| **Resultado esperado** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparecen los datos del artículo a comprar, de la tarjeta de crédito, la información de envío, el desglose del costo<br>3. Aparece el botón de "Finish" |
+| **Resultado obtenido** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparecen los datos del artículo a comprar, de la tarjeta de crédito, la información de envío, el desglose del costo<br>3. Aparece el botón de "Finish" |
+| **Estado** | ⚠️ Pasó con observación, hay que consultar si debe haber un máximo de caracteres en los campos |
+
