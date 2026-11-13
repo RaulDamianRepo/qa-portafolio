@@ -180,3 +180,48 @@ Ejecutado por: Raúl Damián
 | **Resultado obtenido** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparecen los datos del artículo a comprar, de la tarjeta de crédito, la información de envío, el desglose del costo<br>3. Aparece el botón de "Finish" |
 | **Estado** | ⚠️ Pasó con observación, hay que consultar si debe haber un máximo de caracteres en los campos |
 
+## TC-COMPRA-17: Confirmación de los datos del pedido en la página de resumen
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/inventory.html, con sesión iniciada con `standard_user` y "Sauce Labs Backpack" y "Sauce Labs Bike Light" en el carrito |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce` · Sauce Labs Backpack ($29.99) · Sauce Labs Bike Light ($9.99) · First Name: "Rodrigo" · Last Name: "Barriga" · Zip/Postal Code: "12345" |
+| **Pasos** | 1. Clic en el ícono de carrito<br>2. Clic en "Checkout"<br>3. Llenar First Name, Last Name y Zip/Postal Code con los datos base<br>4. Clic en "Continue" |
+| **Resultado esperado** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparece "Sauce Labs Backpack", cantidad 1, $29.99<br>3. Aparece "Sauce Labs Bike Light", cantidad 1, $9.99<br>4. Muestra los datos de la tarjeta con la que se hará el cobro<br>5. Muestra la información del método de envío<br>6. Muestra el desglose del costo total incluyendo la suma de los dos productos y su respectivo impuesto |
+| **Resultado obtenido** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparece "Sauce Labs Backpack", cantidad 1, $29.99<br>3. Aparece "Sauce Labs Bike Light", cantidad 1, $9.99<br>4. Muestra los datos de la tarjeta: "Payment Information: SauceCard #31337"<br>5. Muestra la información del método de envío: "Shipping Information: Free Pony Express Delivery!"<br>6. Muestra el desglose del costo: "Price Total Item total: $39.98 Tax: $3.20 Total: $43.18" |
+| **Estado** | ⚠️ Pasó con observación, hay que consultar si debe también mostrar el nombre del tarjetahabiente y su dirección de facturación, así como la dirección de envío en la información del envío |
+
+## TC-COMPRA-18: Cálculo correcto de subtotal, impuesto y total
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/inventory.html, con sesión iniciada con `standard_user` y "Sauce Labs Backpack" y "Sauce Labs Bike Light" en el carrito |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce` · Sauce Labs Backpack ($29.99) · Sauce Labs Bike Light ($9.99) · First Name: "Rodrigo" · Last Name: "Barriga" · Zip/Postal Code: "12345" |
+| **Pasos** | 1. Clic en el ícono de carrito<br>2. Clic en "Checkout"<br>3. Llenar First Name, Last Name y Zip/Postal Code con los datos base<br>4. Clic en "Continue" |
+| **Resultado esperado** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparece "Sauce Labs Backpack", cantidad 1, $29.99<br>3. Aparece "Sauce Labs Bike Light", cantidad 1, $9.99<br>4. Muestra el desglose del costo total incluyendo la suma de los dos productos $39.98 ($29.99 + 9.99) y su respectivo impuesto.5. Total = Item total + Tax, exacto al centavo. |
+| **Resultado obtenido** | 1. La URL cambia a `https://www.saucedemo.com/checkout-step-two.html`<br>2. Aparece "Sauce Labs Backpack", cantidad 1, $29.99<br>3. Aparece "Sauce Labs Bike Light", cantidad 1, $9.99<br>4. Muestra el desglose del costo total: $43.18 incluyendo la suma de los dos productos: $29.99 + $9.99 = $39.98 y su respectivo impuesto del 8.0%: (calculado: 3.20 / 39.98 = 8.0%) $3.20, con un total de  39.98 + 3.20 = 43.18 |
+| **Estado** | ⚠️ Pasó con observación. La página no muestra la tasa de impuesto; se deduce un 8.0%. Consultar si es la tasa correcta |
+
+## TC-COMPRA-19: El botón de Cancel regresa a la página de inventory conservando los productos en el carrito
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/inventory.html, con sesión iniciada con `standard_user` y "Sauce Labs Backpack" y "Sauce Labs Bike Light" en el carrito |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce` · Sauce Labs Backpack ($29.99) · Sauce Labs Bike Light ($9.99) · First Name: "Rodrigo" · Last Name: "Barriga" · Zip/Postal Code: "12345" |
+| **Pasos** | 1. Clic en el ícono de carrito<br>2. Clic en "Checkout"<br>3. Llenar First Name, Last Name y Zip/Postal Code con los datos base<br>4. Clic en "Continue"<br>5. Clic en "Cancel" |
+| **Resultado esperado** | 1. La URL cambia a `https://www.saucedemo.com/inventory.html`<br>2. el ícono de carrito sigue mostrando el "2" sobre un círculo rojo<br>3. En ambos productos siguen los botones de "Remove" en rojo<br>4. Al dar clic en el ícono del carrito seguimos viendo los 2 productos |
+| **Resultado obtenido** | 1. La URL cambia a `https://www.saucedemo.com/inventory.html`<br>2. el ícono de carrito sigue mostrando el "2" sobre un círculo rojo<br>3. En ambos productos siguen los botones de "Remove" en rojo<br>4. Al dar clic en el ícono del carrito seguimos viendo los 2 productos |
+| **Estado** | ✅ Pasó. Esperaba que Cancel regresara a la tienda sin vaciar el carrito, porque cancelar el pago no significa abandonar la compra: así funcionan la mayoría de las tiendas en línea |
+
+## TC-COMPRA-20: El botón de Finish nos da mensaje de confirmación, vacía el carrito y nos permite volver a inventory
+
+| Campo | Contenido |
+|---|---|
+| **Precondición** | Estar en https://www.saucedemo.com/inventory.html, con sesión iniciada con `standard_user` y "Sauce Labs Backpack" y "Sauce Labs Bike Light" en el carrito |
+| **Datos** | Usuario: `standard_user` · Contraseña: `secret_sauce` · Sauce Labs Backpack ($29.99) · Sauce Labs Bike Light ($9.99) · First Name: "Rodrigo" · Last Name: "Barriga" · Zip/Postal Code: "12345" |
+| **Pasos** | 1. Clic en el ícono de carrito<br>2. Clic en "Checkout"<br>3. Llenar First Name, Last Name y Zip/Postal Code con los datos base<br>4. Clic en "Continue"<br>5. Clic en "Finish"<br>6. Clic en "Back Home" |
+| **Resultado esperado** | 1. La URL cambia a `https://www.saucedemo.com/checkout-complete.html`<br>2. Aparece un mensaje de confirmación de nuestro pedido y la fecha estimada de llegada<br>3. El ícono del carrito ya no muestra número<br>4. La URL vuelve a `https://www.saucedemo.com/inventory.html` |
+| **Resultado obtenido** | 1. La URL cambia a `https://www.saucedemo.com/checkout-complete.html`<br>2. Aparece el siguiente mensaje: "Thank you for your order! Your order has been dispatched, and will arrive just as fast as the pony can get there!"<br>3. El ícono del carrito ya no muestra número<br>4. Aparece el botón de "Generate PDF order"<br>5. La URL vuelve a `https://www.saucedemo.com/inventory.html` |
+| **Estado** | ⚠️ Pasó con observación. La confirmación no indica fecha estimada de entrega |
+
+
