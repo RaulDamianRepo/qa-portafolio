@@ -34,7 +34,7 @@ Ejecutado por: Raúl Damián
 | **Datos** | Usuario: `locked_out_user` · Contraseña: `secret_sauce` |
 | **Pasos** | 1. Escribir el usuario<br>2. Escribir la contraseña<br>3. Clic en Login |
 | **Resultado esperado** | 1. Se queda en la misma pantalla <br>2. Aparece una leyenda sobre usuario restringido<br>3. los campos de username y password en rojo<br>
-| **Resultado obtenido** | 1. Se queda en la misma pantalla<br>2. Aparece la leyenda: `Epic sadface: Sorry, this user has been locked out`<br>3. el borde inferior de los campos en rojo y aparece una x en un circulo al final del campo.<br> |
+| **Resultado obtenido** | 1. Se queda en la misma pantalla<br>2. Aparece la leyenda: `Epic sadface: Sorry, this user has been locked out.`<br>3. el borde inferior de los campos en rojo y aparece una x en un circulo al final del campo.<br> |
 | **Estado** | ✅ Pasó |
 
 
