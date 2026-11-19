@@ -5,3 +5,9 @@ def iniciar_sesion(page, usuario, contrasena):
     page.locator("#user-name").fill(usuario)
     page.locator("#password").fill(contrasena)
     page.locator("#login-button").click()
+
+def llenar_informacion(page, nombre, apellido, cp):
+    page.locator("#first-name").fill(nombre)
+    page.locator("#last-name").fill(apellido)
+    page.locator("#postal-code").fill(cp)
+    page.locator("#continue").click()
